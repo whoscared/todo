@@ -1,16 +1,19 @@
 package com.example.todo.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
+@Table(name = "Task", schema = "todo")
 public class Task {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "todo.task_id_seq")
+    @SequenceGenerator(name = "task_id_seq")
     private Long id;
     private String task;
     private boolean completed;
+
+    public Task() {
+    }
 
     public Task(String task, boolean completed) {
         this.task = task;
